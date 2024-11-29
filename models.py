@@ -32,9 +32,21 @@ class NoteManager():
             }
             for note in notes:
                 serializer['data'].append(Note(note['id'], note['body'], note['status'], note['createdAt'] , note['updatedAt']))
+            return serializer['data']
+    
+    # Returns all the notes that have status 'todo'
+    @classmethod
+    def filter(cls, status):
+        with open('db.json', 'r') as database:
+            notes = json.load(database)['notes']
+            serializer = {
+                'data': [],
+            }
+            for note in notes:
+                if note['status'] == status:
+                    serializer['data'].append(Note(note['id'], note['body'], note['status'], note['createdAt'] , note['updatedAt']))
+            return serializer['data']
 
-            for note in serializer['data']:
-                print(note)
 
     # Returns total amount of instances ever created (even if they have been deleted after)
     @classmethod
@@ -60,6 +72,7 @@ class NoteManager():
                 data['instances'] += 1
                 json.dump(data, database)
 
+    # Deletes a note, with provided ID, from the database
     @classmethod
     def delete(cls, id):
         with open('db.json', 'r') as database:
@@ -71,7 +84,8 @@ class NoteManager():
                     if note['id'] == id:
                         data['notes'].remove(note)
                         json.dump(data, database)
-
+    
+    # Updates a note ,with the provied ID, in the database
     @classmethod
     def update(cls, id, body):
         with open('db.json', 'r') as database:
@@ -85,6 +99,25 @@ class NoteManager():
                         data['notes'][index]['updatedAt'] = str(datetime.now())
                         break
                 json.dump(data, database)
+
+    # Updates a note's status ,with the provied ID, in the database
+    @classmethod
+    def mark_as(cls, id, status):
+        with open('db.json', 'r') as database:
+            data = json.load(database)
+            notes = data['notes']
+            
+            with open('db.json', 'w') as database:
+                for index, note in enumerate(notes):
+                    if note['id'] == id:
+                        data['notes'][index]['status'] = status
+                        data['notes'][index]['updatedAt'] = str(datetime.now())
+                        break
+                json.dump(data, database)
+
+    @classmethod
+    def DoNotExist(cls):
+        return False if cls.instance_count() else True
         
 class Note():
     objects = NoteManager
@@ -95,6 +128,14 @@ class Note():
         self.status = status
         self.createdAt = createdAt
         self.updatedAt = updatedAt
+
+    @classmethod
+    def display(cls, notes):
+        for note in notes:
+            if note != notes[-1]:
+                print(f'--> {note} (id={note.id})', end='\n\n')
+            else:
+                print(f'--> {note} (id={note.id})')
 
     def __str__(self):
         return self.body
