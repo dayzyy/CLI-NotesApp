@@ -59,6 +59,32 @@ class NoteManager():
                 data['notes'].append(object)
                 data['instances'] += 1
                 json.dump(data, database)
+
+    @classmethod
+    def delete(cls, id):
+        with open('db.json', 'r') as database:
+            data = json.load(database)
+            notes = data['notes']
+            
+            with open('db.json', 'w') as database:
+                for note in notes:
+                    if note['id'] == id:
+                        data['notes'].remove(note)
+                        json.dump(data, database)
+
+    @classmethod
+    def update(cls, id, body):
+        with open('db.json', 'r') as database:
+            data = json.load(database)
+            notes = data['notes']
+            
+            with open('db.json', 'w') as database:
+                for index, note in enumerate(notes):
+                    if note['id'] == id:
+                        data['notes'][index]['body'] = body
+                        data['notes'][index]['updatedAt'] = str(datetime.now())
+                        break
+                json.dump(data, database)
         
 class Note():
     objects = NoteManager
@@ -72,7 +98,3 @@ class Note():
 
     def __str__(self):
         return self.body
-
-# Note.objects.create('First note of this project')
-NoteManager.database()
-print(Note.objects.all())
