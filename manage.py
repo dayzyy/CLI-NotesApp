@@ -4,10 +4,6 @@ from models import Note
 
 Note.objects.database()
 
-CHOICES = []
-for id in range(Note.objects.instance_count()):
-    CHOICES.append(id + 1)
-
 parser = argparse.ArgumentParser(description='Manage your notes')
 
 subparser = parser.add_subparsers(dest='command', help='Commands')
@@ -66,4 +62,3 @@ match args.command:
             case 'done':
                 notes = Note.objects.filter('done')
                 Note.display(notes, status='done')
-
