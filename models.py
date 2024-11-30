@@ -33,6 +33,15 @@ class NoteManager():
             for note in notes:
                 serializer['data'].append(Note(note['id'], note['body'], note['status'], note['createdAt'] , note['updatedAt']))
             return serializer['data']
+
+    @classmethod
+    def DoesNotExist(cls, id):
+        notes = cls.all()
+
+        for note in notes:
+            if note.id == id: return False
+        print(f'Value Error: No note with id: {id}!')
+        return True
     
     # Returns all the notes that have status 'todo'
     @classmethod
@@ -114,10 +123,6 @@ class NoteManager():
                         data['notes'][index]['updatedAt'] = str(datetime.now())
                         break
                 json.dump(data, database)
-
-    @classmethod
-    def DoNotExist(cls):
-        return False if cls.instance_count() else True
         
 class Note():
     objects = NoteManager
@@ -130,12 +135,16 @@ class Note():
         self.updatedAt = updatedAt
 
     @classmethod
-    def display(cls, notes):
+    def display(cls, notes, status='todo'):
+        match status:
+            case Status.ToDo: print('******TO-DO******')
+            case Status.InProgress: print('******IN-PROGRESS******')
+            case Status.Done: print('******DONE******')
+            case _: print('******ALL-TASKS******')
+
+        print(f'{len(notes)} note{'' if len(notes) == 1 else 's'} in total', end='\n\n')
         for note in notes:
-            if note != notes[-1]:
-                print(f'--> {note} (id={note.id})', end='\n\n')
-            else:
-                print(f'--> {note} (id={note.id})')
+                print(f'--> {note} (id: {note.id} | status: {note.status})', end=f'{'\n' if note == notes[-1] else '\n\n'}')
 
     def __str__(self):
         return self.body
