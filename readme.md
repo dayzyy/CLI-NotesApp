@@ -21,7 +21,7 @@ git clone https://github.com/dayzyy/CLI-NotesApp.git
 
 ## COMMANDS
 
-```
+```python
 # To add a task
 python3 manage.py add <note>
 
@@ -33,7 +33,7 @@ python3 manage.py add "Wash the dishes"
 python3 manage.py update <id> <note>
 
 # Example
-python3 manage.py update 1 "<span style="color:lightblue">Wash the dishes and mop the floor</span>"
+python3 manage.py update 1 "Wash the dishes and mop the floor"
 
 
 # To delete a task
