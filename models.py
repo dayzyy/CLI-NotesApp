@@ -33,7 +33,8 @@ class NoteManager():
             for note in notes:
                 serializer['data'].append(Note(note['id'], note['body'], note['status'], note['createdAt'] , note['updatedAt']))
             return serializer['data']
-
+    
+    # Checks if Note with such id exists, if it does Returns True. If it doesnt it raises an error
     @classmethod
     def DoesNotExist(cls, id):
         notes = cls.all()
