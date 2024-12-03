@@ -19,7 +19,7 @@ Each task has an **ID**, the **text**(note) and a **status**, which tells you if
 git clone https://github.com/dayzyy/CLI-NotesApp.git
 ```
 
-## COMMANDS
+## Commands
 
 ```python
 # To add a task
