@@ -142,7 +142,7 @@ class Note():
             case Status.Done: print('******DONE******')
             case _: print('******ALL-TASKS******')
 
-        print(f'{len(notes)} note{'' if len(notes) == 1 else 's'} in total', end='\n\n')
+        print(f'{len(notes)} task{'' if len(notes) == 1 else 's'} in total', end='\n\n')
         for note in notes:
                 print(f'--> {note} (id: {note.id} | status: {note.status})', end=f'{'\n' if note == notes[-1] else '\n\n'}')
 
