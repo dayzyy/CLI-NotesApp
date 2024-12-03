@@ -12,6 +12,7 @@ Each task has an **ID**, the **text**(note) and a **status**, which tells you if
 
 ## Prerequisites
 - **Python 3.6+**
+- No External Modules required
 
 ## Setup
 1. Clone the repository:
@@ -64,5 +65,5 @@ python3 manage.py list done
 python3 manage.py list in-progress
 ```
 
-##### Inspired By
+### Inspired By
 https://roadmap.sh/projects/task-tracker
