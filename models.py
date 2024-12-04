@@ -6,7 +6,7 @@ class Status():
     InProgress = 'in-progress'
     Done = 'done'
 
-class NoteManager():
+class TaskManager():
     # Checks if database exists, if it doesnt it creates it.
     @classmethod
     def database(cls):
@@ -31,7 +31,7 @@ class NoteManager():
                 'data': [],
             }
             for note in notes:
-                serializer['data'].append(Note(note['id'], note['body'], note['status'], note['createdAt'] , note['updatedAt']))
+                serializer['data'].append(Task(note['id'], note['body'], note['status'], note['createdAt'] , note['updatedAt']))
             return serializer['data']
     
     # Checks if Note with such id exists, if it does Returns True. If it doesnt it raises an error
@@ -41,7 +41,7 @@ class NoteManager():
 
         for note in notes:
             if note.id == id: return False
-        print(f'Value Error: No note with id: {id}!')
+        print(f'Value Error: No task with id: {id}!')
         return True
     
     # Returns all the notes that have status 'todo'
@@ -54,7 +54,7 @@ class NoteManager():
             }
             for note in notes:
                 if note['status'] == status:
-                    serializer['data'].append(Note(note['id'], note['body'], note['status'], note['createdAt'] , note['updatedAt']))
+                    serializer['data'].append(Task(note['id'], note['body'], note['status'], note['createdAt'] , note['updatedAt']))
             return serializer['data']
 
 
@@ -125,8 +125,8 @@ class NoteManager():
                         break
                 json.dump(data, database)
         
-class Note():
-    objects = NoteManager
+class Task():
+    objects = TaskManager
 
     def __init__(self, id, body, status, createdAt, updatedAt):
         self.id = id

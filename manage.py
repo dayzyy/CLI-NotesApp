@@ -1,8 +1,8 @@
 import argparse
 
-from models import Note
+from models import Task
 
-Note.objects.database()
+Task.objects.database()
 
 parser = argparse.ArgumentParser(description='Manage your notes')
 
@@ -29,36 +29,36 @@ args = parser.parse_args()
 
 match args.command:
     case 'add':
-        Note.objects.create(args.note)
+        Task.objects.create(args.note)
     case 'delete':
-        if Note.objects.DoesNotExist(args.id):
+        if Task.objects.DoesNotExist(args.id):
             exit()
-        Note.objects.delete(args.id)
+        Task.objects.delete(args.id)
     case 'update':
-        if Note.objects.DoesNotExist(args.id):
+        if Task.objects.DoesNotExist(args.id):
             exit()
-        Note.objects.update(args.id, args.note)
+        Task.objects.update(args.id, args.note)
     case 'mark':
-        if Note.objects.DoesNotExist(args.id):
+        if Task.objects.DoesNotExist(args.id):
             exit()
         match args.progress:
             case 'todo':
-                Note.objects.mark_as(args.id, 'todo')
+                Task.objects.mark_as(args.id, 'todo')
             case 'in-progress':
-                Note.objects.mark_as(args.id, 'in-progress')
+                Task.objects.mark_as(args.id, 'in-progress')
             case 'done':
-                Note.objects.mark_as(args.id, 'done')
+                Task.objects.mark_as(args.id, 'done')
     case 'list':
         match args.criteria:
             case 'all':
-                notes = Note.objects.all()
-                Note.display(notes, status='all')
+                notes = Task.objects.all()
+                Task.display(notes, status='all')
             case 'todo':
-                notes = Note.objects.filter('todo')
-                Note.display(notes)
+                notes = Task.objects.filter('todo')
+                Task.display(notes)
             case 'in-progress':
-                notes = Note.objects.filter('in-progress')
-                Note.display(notes, status='in-progress')
+                notes = Task.objects.filter('in-progress')
+                Task.display(notes, status='in-progress')
             case 'done':
-                notes = Note.objects.filter('done')
-                Note.display(notes, status='done')
+                notes = Task.objects.filter('done')
+                Task.display(notes, status='done')

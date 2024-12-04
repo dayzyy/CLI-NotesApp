@@ -19,6 +19,16 @@ Each task has an **ID**, the **text**(note) and a **status**, which tells you if
 ```
 git clone https://github.com/dayzyy/CLI-NotesApp.git
 ```
+2. Navigate to the created directory:
+```
+cd CLI-TaskTrackerApp/
+```
+
+You are all set! Now you can interact with the app using commands listed below
+You can also use the comand line to see all available commands:
+```python
+python3 manage.py -h
+```
 
 ## Commands
 
