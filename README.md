@@ -1,6 +1,7 @@
 # Task Manager CLI Application
 
-Using this application you can **create**, **update** and **delete** tasks. Afterwards you can display them and keep track of the things you have to do. :D  
+Using this application you can **create**, **update** and **delete** tasks. Afterwards you can display them and keep track of the things you have to do. :D
+
 Each task has an **ID**, the **text**(note) and a **status**, which tells you if the task is **todo/done/in-progress**.
 
 ## Features
@@ -17,7 +18,7 @@ Each task has an **ID**, the **text**(note) and a **status**, which tells you if
 ## Setup
 1. Clone the repository:
 ```
-git clone https://github.com/dayzyy/CLI-NotesApp.git
+git clone https://github.com/dayzyy/CLI-TaskTrackerApp.git
 ```
 2. Navigate to the created directory:
 ```
@@ -25,6 +26,7 @@ cd CLI-TaskTrackerApp/
 ```
 
 You are all set! Now you can interact with the app using commands listed below
+
 You can also use the comand line to see all available commands:
 ```python
 python3 manage.py -h
